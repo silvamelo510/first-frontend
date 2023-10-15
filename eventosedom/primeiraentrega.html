@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário</title>
+</head>
+
+<body>
+  <form id="meuForm" action="">
+
+    <select name="select1" id="select1" onchange="adicionarDentista()">
+      <option value="selecionar">Tipo de Serviço</option>
+      <option value="Clínica Geral">Clínica Geral</option>
+      <option value="Ortodontia">Ortodontia</option>
+      <option value="Odontopediatria">Odontopediatria</option>
+      <option value="Periodontia">Periodontia</option>
+      <option value="Endodontia">Endodontia</option>
+      <option value="Implante Dentário">Implante Dentário</option>
+      <option value="Clareamento Dentário">Clareamento Dentário</option>
+    </select><br>
+
+    <select name="select2" id="select2">
+    </select><br>
+
+    <input type="text" id="meuTexto" value=""><input type="submit" value="Enviar"><br>
+    <div id="resultado"></div>
+  </form>
+
+  <script>
+    var textoAntigo = null;
+
+    document.getElementById("meuForm").addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var texto = document.getElementById('meuTexto').value;
+      var select1 = document.getElementById('select1').value;
+      var select2 = document.getElementById('select2').value;
+
+      if (textoAntigo) {
+        textoAntigo.innerHTML = texto + ' [' + select1 + ' - ' + select2 +
+          '] <img src="icone_excluir.svg" alt="excluir" class="excluir">' +
+          ' <img src="icone_modificar.svg" alt="modificar" class="modificar">';
+        addEventListeners(textoAntigo);
+        textoAntigo = null;
+      } else {
+        var divResultado = document.getElementById('resultado');
+        var novoTexto = document.createElement('p');
+        novoTexto.innerHTML = texto + ' [' + select1 + ' - ' + select2 +
+          '] <img src="icone_excluir.svg" alt="excluir" class="excluir">' +
+          ' <img src="icone_modificar.svg" alt="modificar" class="modificar">';
+        divResultado.appendChild(novoTexto);
+        addEventListeners(novoTexto);
+      }
+
+      document.getElementById('meuTexto').value = '';
+    });
+
+    function addEventListeners(element) {
+      element.querySelector('.excluir').addEventListener('click', function (e) {
+        e.preventDefault();
+        element.parentNode.removeChild(element);
+      });
+      element.querySelector('.modificar').addEventListener('click', function (e) {
+        e.preventDefault();
+        document.getElementById('meuTexto').value = element.firstChild.nodeValue.trim();
+        textoAntigo = element;
+      });
+    }
+
+    function adicionarDentista() {
+      var select_servico = document.getElementById("select1");
+      var tipo_servico = select_servico.value;
+      var select_dentista = document.getElementById("select2")
+
+      for (var i = select_dentista.children.length - 1; i >= 0; i--) {
+        select_dentista.removeChild(select_dentista[i])
+      }
+      var op0 = document.createElement("option");
+      op0.value = "dentista";
+      op0.innerHTML = "Dentistas Especializados";
+      select_dentista.appendChild(op0);
+
+      switch (tipo_servico) {
+
+        case "Clínica Geral":
+
+          var op1 = document.createElement("option");
+          op1.value = "Dr. João Silva";
+          op1.innerHTML = "Dr. João Silva";
+          select_dentista.appendChild(op1);
+
+          var op2 = document.createElement("option");
+          op2.value = "Dra. Maria Fernandes";
+          op2.innerHTML = "Dra. Maria Fernandes";
+          select_dentista.appendChild(op2);
+          break;
+
+        case "Ortodontia":
+
+          var op1 = document.createElement("option");
+          op1.value = "Dr. Pedro Almeida";
+          op1.innerHTML = "Dr. Pedro Almeida";
+          select_dentista.appendChild(op1);
+
+          var op2 = document.createElement("option");
+          op2.value = "Dra. Ana Costa";
+          op2.innerHTML = "Dra. Ana Costa";
+          select_dentista.appendChild(op2);
+          break;
+
+        case "Odontopediatria":
+
+          var op1 = document.createElement("option");
+          op1.value = "Dr. Lucas Santos";
+          op1.innerHTML = "Dr. Lucas Santos";
+          select_dentista.appendChild(op1);
+
+          var op2 = document.createElement("option");
+          op2.value = "Dra. Beatriz Pereira";
+          op2.innerHTML = "Dra. Beatriz Pereira";
+          select_dentista.appendChild(op2);
+          break;
+
+        case "Periodontia":
+          var op1 = document.createElement("option");
+          op1.value = "Dr. Gabriel Oliveira";
+          op1.innerHTML = "Dr. Gabriel Oliveira";
+          select_dentista.appendChild(op1);
+
+          var op2 = document.createElement("option");
+          op2.value = "Dra. Laura Rodrigues";
+          op2.innerHTML = "Dra. Laura Rodrigues";
+          select_dentista.appendChild(op2);
+          break;
+
+        case "Endodontia":
+          var op1 = document.createElement("option");
+          op1.value = "Dr. Rafael Lima";
+          op1.innerHTML = "Dr. Rafael Lima";
+          select_dentista.appendChild(op1);
+
+          var op2 = document.createElement("option");
+          op2.value = "Dra. Sofia Castro";
+          op2.innerHTML = "Dra. Sofia Castro";
+          select_dentista.appendChild(op2);
+          break;
+
+        case "Implante Dentário":
+          var op1 = document.createElement("option");
+          op1.value = "Dr. Roberto Carvalho";
+          op1.innerHTML = "Dr. Roberto Carvalho";
+          select_dentista.appendChild(op1);
+
+          var op2 = document.createElement("option");
+          op2.value = "Dra. Teresa Ribeiro";
+          op2.innerHTML = "Dra. Teresa Ribeiro";
+          select_dentista.appendChild(op2);
+          break;
+
+        case "Clareamento Dentário":
+          var op1 = document.createElement("option");
+          op1.value = "Dr. Francisco Martins";
+          op1.innerHTML = "Dr. Francisco Martins";
+          select_dentista.appendChild(op1);
+
+          var op2 = document.createElement("option");
+          op2.value = "Dra. Juliana Barros";
+          op2.innerHTML = "Dra. Juliana Barros";
+          select_dentista.appendChild(op2);
+          break;
+      }
+    }
+  </script>
+</body>
+
+</html>
